@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/books', [BookController::class, 'index']);
-Route::get('/books/create', [BookController::class, 'create']);
+Route::get('/books', [BookController::class, 'index'])->name('book.index');
+Route::get('/books/create', [BookController::class, 'create'])->name('book.create');
 Route::post('/books/store', [BookController::class, 'store'])->name('book.store');
+Route::get('/books/{id}/edit', [BookController::class, 'edit'])->name('book.edit');
