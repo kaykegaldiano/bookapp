@@ -43,7 +43,7 @@
                                             <form action="{{ route('book.destroy', $book->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="submit" class="btn btn-danger" onclick="deleteMessage('{{ $book->name }}', event)">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -57,4 +57,5 @@
             </div>
         </div>
     </div>
+    <script src="/app.js"></script>
 </body>
