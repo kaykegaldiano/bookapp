@@ -35,4 +35,15 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         return view('book.edit', compact('book'));
     }
+
+    public function update(BookRequest $request, int $id)
+    {
+        Book::whereId($id)->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category
+        ]);
+
+        return redirect()->route('book.index')->with('message', 'Book updated with success!');
+    }
 }
