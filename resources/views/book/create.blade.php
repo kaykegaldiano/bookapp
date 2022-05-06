@@ -29,7 +29,7 @@
                             <br>
                             <label class="form-label" for="description">Description of book</label>
                             <textarea class="form-control" name="description" id="description"></textarea>
-                            @if ($errors->has('name'))
+                            @if ($errors->has('description'))
                                 <span class="text-danger">{{ $errors->first('description') }}</span>
                             @endif
                             <br>
