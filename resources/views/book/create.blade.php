@@ -11,7 +11,7 @@
     <div class="card">
         <div class="card-header">Create a new book</div>
         <div class="card-body">
-            <form action="{{ route('book.store') }}" method="POST">@csrf
+            <form action="{{ route('book.store') }}" method="POST" enctype="multipart/form-data">@csrf
                 <label class="form-label" for="name">Name of book</label>
                 <input type="text" class="form-control" name="name" id="name" placeholder="name of book">
                 @if ($errors->has('name'))
@@ -34,8 +34,14 @@
                     <option value="educational">Education</option>
                 </select>
                 @if ($errors->has('category'))
-                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                    <span class="text-danger">{{ $errors->first('category') }}</span>
                 @endif
+                <br>
+                <label for="image" class="form-label">Image of book</label>
+                <input type="file" class="form-control" name="image" id="image">
+                @error('image')
+                    <span class="text-danger">{{ $message }}</span>
+                @enderror
                 <br>
                 <input type="submit" value="Submit" class="btn btn-primary">
             </form>
