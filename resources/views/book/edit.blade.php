@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header">Update book</div>
     <div class="card-body">
-        <form action="{{ route('book.update', $book->id) }}" method="POST">
+        <form action="{{ route('book.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <label class="form-label" for="name">Name of book</label>
@@ -31,6 +31,12 @@
                 <option value="educational" @if ($book->category === 'educational') selected @endif>Education</option>
             </select>
             @error('category')
+                <span class="text-danger">{{ $message }}</span>
+            @enderror
+            <br>
+            <label for="image" class="form-label">Image of book</label>
+            <input type="file" class="form-control" name="image" id="image">
+            @error('image')
                 <span class="text-danger">{{ $message }}</span>
             @enderror
             <br>
