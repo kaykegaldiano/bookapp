@@ -46,4 +46,11 @@ class BookController extends Controller
 
         return redirect()->route('book.index')->with('message', 'Book updated with success!');
     }
+
+    public function destroy(int $id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return back()->with('message', 'Book deleted with success!');
+    }
 }
