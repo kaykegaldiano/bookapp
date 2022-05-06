@@ -29,4 +29,10 @@ class BookController extends Controller
 
         return back()->with('message', 'Book added with success!');
     }
+
+    public function edit(int $id)
+    {
+        $book = Book::findOrFail($id);
+        return view('book.edit', compact('book'));
+    }
 }
