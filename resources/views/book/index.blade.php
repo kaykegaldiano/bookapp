@@ -24,6 +24,11 @@
                 <tbody>
                     @forelse ($books as $book)
                         <tr>
+                            <td>
+                                @if ($book->image)
+                                    <img src="{{ Storage::url($book->image) }}" width="80">
+                                @endif
+                            </td>
                             <td>{{ $book->name }}</td>
                             <td>{{ $book->description }}</td>
                             <td>{{ $book->category }}</td>
