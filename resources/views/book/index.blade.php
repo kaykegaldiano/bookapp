@@ -27,6 +27,8 @@
                             <td>
                                 @if ($book->image)
                                     <img src="{{ Storage::url($book->image) }}" width="80">
+                                @else
+                                    <img src="/img/test.png" width="80">
                                 @endif
                             </td>
                             <td>{{ $book->name }}</td>
