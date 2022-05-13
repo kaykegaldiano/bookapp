@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
+    @auth
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ route('book.index') }}">Book App</a>
@@ -16,7 +17,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto">
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{{ route('book.index') }}">Home</a>
               </li>
@@ -24,9 +25,17 @@
                 <a class="nav-link" href="{{ route('book.create') }}">Add book</a>
               </li>
             </ul>
+            <div class="me-2">
+              <form action="{{ route('auth.logout') }}" method="POST" class="d-flex">
+                @csrf
+                <span class="navbar-text me-2">{{ Auth::user()->name }}</span>
+                <button type="submit" class="btn btn-link text-decoration-none">Logout</button>
+              </form>
+            </div>
           </div>
         </div>
       </nav>
+      @endauth
     <div class="container">
         <div class="row justify-content-center pt-5">
             <div class="col-md-8">
@@ -35,5 +44,19 @@
         </div>
     </div>
     <script src="/app.js"></script>
+    @auth
+    <script>
+      // dynamic active class on menu
+      let navLinks = document.getElementsByClassName('nav-link')
+      let current = 0
+      for (var i = 0; i < navLinks.length; i++) {
+          if (navLinks[i].href === document.URL) {
+              current = i
+          }
+      }
+
+      navLinks[current].className += ' active'
+    </script>
+    @endauth
 </body>
 </html>
