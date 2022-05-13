@@ -6,12 +6,15 @@ use App\Http\Requests\BookRequest;
 use App\Http\Requests\UpdateFormRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function index()
     {
-        $books = Book::paginate(5);
+        $user = Auth::user();
+        // $books = Book::paginate(5);
+        $books = Book::whereBelongsTo($user)->paginate(5);
         return view('book.index', compact('books'));
     }
 
@@ -28,7 +31,8 @@ class BookController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'category' => $request->category,
-            'image' => $image
+            'image' => $image,
+            'user_id' => Auth::user()->id
         ]);
 
         return back()->with('message', 'Book added with success!');
